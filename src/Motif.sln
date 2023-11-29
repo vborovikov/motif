@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motif", "Motif\Motif.csproj", "{8550F1A4-8872-4C3F-A607-068E1267A3BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotifDemo", "MotifDemo\MotifDemo.csproj", "{51DC7831-EFD2-400B-B9C7-138B4A5789D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8550F1A4-8872-4C3F-A607-068E1267A3BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8550F1A4-8872-4C3F-A607-068E1267A3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8550F1A4-8872-4C3F-A607-068E1267A3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8550F1A4-8872-4C3F-A607-068E1267A3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DC7831-EFD2-400B-B9C7-138B4A5789D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DC7831-EFD2-400B-B9C7-138B4A5789D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DC7831-EFD2-400B-B9C7-138B4A5789D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51DC7831-EFD2-400B-B9C7-138B4A5789D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

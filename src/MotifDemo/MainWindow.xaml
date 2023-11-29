@@ -1,0 +1,55 @@
+﻿<theme:MotifWindow x:Class="MotifDemo.MainWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:theme="clr-namespace:Motif.Controls;assembly=Motif"
+                   Title="Motif Theme"
+                   Height="350"
+                   Width="525"
+                   UseLayoutRounding="True">
+ <ScrollViewer HorizontalScrollBarVisibility="Auto"
+               VerticalScrollBarVisibility="Auto"
+               VerticalAlignment="Stretch">
+  <StackPanel Orientation="Vertical"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top">
+
+   <StackPanel Orientation="Horizontal">
+    <GroupBox Header="Radio Buttons">
+     <StackPanel>
+      <RadioButton Content="Normal" />
+      <RadioButton Content="Checked"
+                   IsChecked="True" />
+      <RadioButton Content="Indeterminate"
+                   IsChecked="{x:Null}"
+                   IsThreeState="True" />
+      <RadioButton Content="Disabled"
+                   IsEnabled="False" />
+     </StackPanel>
+    </GroupBox>
+
+    <GroupBox Header="Checkboxes">
+     <StackPanel>
+      <CheckBox Content="Normal" />
+      <CheckBox Content="Checked"
+                IsChecked="True" />
+      <CheckBox Content="Indeterminate"
+                IsChecked="{x:Null}"
+                IsThreeState="True" />
+      <CheckBox Content="Disabled"
+                IsEnabled="False" />
+     </StackPanel>
+    </GroupBox>
+   </StackPanel>
+
+   <StackPanel Orientation="Horizontal">
+    <Button Content="Normal" />
+    <Button Content="Default"
+            IsDefault="True" />
+    <Button Content="Disabled"
+            IsEnabled="False" />
+    <ToggleButton Content="Toggle"
+                  IsChecked="True" />
+   </StackPanel>
+  </StackPanel>
+ </ScrollViewer>
+</theme:MotifWindow>

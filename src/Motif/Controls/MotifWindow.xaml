@@ -1,0 +1,410 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+                    xmlns:windows="clr-namespace:System.Windows;assembly=PresentationFramework"
+                    xmlns:theme="clr-namespace:Motif.Controls.Primitives"
+                    xmlns:local="clr-namespace:Motif.Controls">
+ <ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary Source="pack://application:,,,/Motif;Component/Themes/MotifColors.xaml" />
+ </ResourceDictionary.MergedDictionaries>
+
+ <Style TargetType="{x:Type local:MotifWindow}">
+  <Setter Property="Foreground"
+          Value="{StaticResource ThemeControlTextBrush}" />
+  <Setter Property="Background"
+          Value="{StaticResource ThemeControlBrush}" />
+  <Setter Property="BorderBrush"
+          Value="{x:Static theme:MotifBorderDecorator.MotifBorderBrush}" />
+  <Setter Property="BorderThickness"
+          Value="1" />
+  <Setter Property="shell:WindowChrome.WindowChrome">
+   <Setter.Value>
+    <shell:WindowChrome UseAeroCaptionButtons="False"
+                        GlassFrameThickness="0"
+                        ResizeBorderThickness="0"
+                        CaptionHeight="19"
+                        CornerRadius="0"
+                        NonClientFrameEdges="None" />
+   </Setter.Value>
+  </Setter>
+  <Setter Property="Template">
+   <Setter.Value>
+    <ControlTemplate TargetType="{x:Type local:MotifWindow}">
+
+     <ControlTemplate.Resources>
+      <Style x:Key="SystemButtonStyle"
+             TargetType="{x:Type Button}">
+       <Setter Property="OverridesDefaultStyle"
+               Value="True" />
+       <Setter Property="shell:WindowChrome.IsHitTestVisibleInChrome"
+               Value="True" />
+       <Setter Property="Focusable"
+               Value="False" />
+       <Setter Property="FocusVisualStyle"
+               Value="{x:Null}" />
+       <Setter Property="Background"
+               Value="{StaticResource ThemeActiveBrush}" />
+       <Setter Property="Foreground"
+               Value="{StaticResource ThemeActiveTextBrush}" />
+       <Setter Property="BorderBrush"
+               Value="{x:Static theme:MotifBorderDecorator.MotifBorderBrush}" />
+       <Setter Property="BorderThickness"
+               Value="1" />
+       <Setter Property="SnapsToDevicePixels"
+               Value="True" />
+       <Setter Property="Width"
+               Value="19" />
+       <Setter Property="Height"
+               Value="19" />
+       <Setter Property="HorizontalContentAlignment"
+               Value="Center" />
+       <Setter Property="VerticalContentAlignment"
+               Value="Center" />
+       <Setter Property="ToolTip"
+               Value="{Binding Command.Name, RelativeSource={RelativeSource Self}}" />
+       <Setter Property="Template">
+        <Setter.Value>
+         <ControlTemplate TargetType="{x:Type Button}">
+          <theme:MotifBorderDecorator x:Name="ContentContainer"
+                                      BorderStyle="ThinRaised"
+                                      Background="{TemplateBinding Background}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      SnapsToDevicePixels="true">
+           <ContentPresenter Margin="{TemplateBinding Padding}"
+                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+          </theme:MotifBorderDecorator>
+          <ControlTemplate.Triggers>
+           <Trigger Property="IsPressed"
+                    Value="true">
+            <Setter Property="BorderStyle"
+                    Value="ThinPressed"
+                    TargetName="ContentContainer" />
+           </Trigger>
+           <Trigger Property="IsEnabled"
+                    Value="false">
+            <Setter Property="Foreground"
+                    Value="{StaticResource ThemeDisabledTextBrush}" />
+           </Trigger>
+          </ControlTemplate.Triggers>
+         </ControlTemplate>
+        </Setter.Value>
+       </Setter>
+      </Style>
+     </ControlTemplate.Resources>
+
+     <Border Margin="{Binding Path=(shell:WindowChrome.WindowChrome).ResizeBorderThickness, RelativeSource={RelativeSource TemplatedParent}}">
+      <theme:MotifBorderDecorator x:Name="WindowFrame"
+                                  BorderStyle="ThinRaised"
+                                  Background="{StaticResource ThemeActiveBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  SnapsToDevicePixels="true">
+       <Grid>
+
+        <Grid Name="GripBorder">
+
+         <Grid.RowDefinitions>
+          <RowDefinition Height="4" />
+          <RowDefinition Height="19" />
+          <RowDefinition Height="*" />
+          <RowDefinition Height="19" />
+          <RowDefinition Height="4" />
+         </Grid.RowDefinitions>
+
+         <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="4" />
+          <ColumnDefinition Width="19" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="19" />
+          <ColumnDefinition Width="4" />
+         </Grid.ColumnDefinitions>
+
+         <!-- TopLeft Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.RowSpan="2"
+                                     Grid.ColumnSpan="2"
+                                     shell:WindowChrome.ResizeGripDirection="TopLeft" />
+         <theme:MotifBorderDecorator BorderStyle="ThinPressed"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="1,1,0,0"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Margin="3,3,0,0"
+                                     Grid.RowSpan="2"
+                                     Grid.ColumnSpan="2" />
+
+         <!-- TopRight Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.RowSpan="2"
+                                     Grid.Column="3"
+                                     Grid.ColumnSpan="2"
+                                     shell:WindowChrome.ResizeGripDirection="TopRight" />
+         <theme:MotifBorderDecorator BorderStyle="ThinPressed"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="0,1,1,0"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Margin="0,3,3,0"
+                                     Grid.RowSpan="2"
+                                     Grid.Column="3"
+                                     Grid.ColumnSpan="2" />
+
+         <!-- BottomLeft Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.Row="3"
+                                     Grid.RowSpan="2"
+                                     Grid.ColumnSpan="2"
+                                     shell:WindowChrome.ResizeGripDirection="BottomLeft" />
+         <theme:MotifBorderDecorator BorderStyle="ThinPressed"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="1,0,0,1"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Margin="3,0,0,3"
+                                     Grid.Row="3"
+                                     Grid.RowSpan="2"
+                                     Grid.ColumnSpan="2" />
+
+         <!-- BottomRight Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.Row="3"
+                                     Grid.RowSpan="2"
+                                     Grid.Column="3"
+                                     Grid.ColumnSpan="2"
+                                     shell:WindowChrome.ResizeGripDirection="BottomRight" />
+         <theme:MotifBorderDecorator BorderStyle="ThinPressed"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="0,0,1,1"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Margin="0,0,3,3"
+                                     Grid.Row="3"
+                                     Grid.RowSpan="2"
+                                     Grid.Column="3"
+                                     Grid.ColumnSpan="2" />
+
+         <!-- Top Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.Column="2"
+                                     shell:WindowChrome.ResizeGripDirection="Top" />
+
+         <!-- Bottom Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.Row="4"
+                                     Grid.Column="2"
+                                     shell:WindowChrome.ResizeGripDirection="Bottom" />
+
+         <!-- Left Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.Row="2"
+                                     shell:WindowChrome.ResizeGripDirection="Left" />
+
+         <!-- Right Grip -->
+         <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                     Background="{Binding Background, ElementName=WindowFrame}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     SnapsToDevicePixels="true"
+                                     Grid.Row="2"
+                                     Grid.Column="4"
+                                     shell:WindowChrome.ResizeGripDirection="Right" />
+        </Grid>
+
+        <Grid Name="ContentArea"
+              Background="{TemplateBinding Background}"
+              Margin="4">
+         <Grid.RowDefinitions>
+          <RowDefinition Height="19" />
+          <RowDefinition Height="*" />
+         </Grid.RowDefinitions>
+
+         <Grid Name="NonClientArea">
+          <Grid.ColumnDefinitions>
+           <ColumnDefinition Width="Auto" />
+           <ColumnDefinition Width="*" />
+           <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+
+          <Button Command="{x:Static SystemCommands.ShowSystemMenuCommand}"
+                  Background="{Binding Background, ElementName=WindowFrame}"
+                  Style="{StaticResource SystemButtonStyle}">
+           <Grid>
+            <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                        Background="{Binding Background, ElementName=WindowFrame}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        SnapsToDevicePixels="true"
+                                        Width="11"
+                                        Height="4" />
+            <Image Name="PART_Icon"
+                   Source="{TemplateBinding Icon}"
+                   shell:WindowChrome.IsHitTestVisibleInChrome="True"
+                   Width="16"
+                   Height="16" />
+           </Grid>
+          </Button>
+
+          <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                      Background="{Binding Background, ElementName=WindowFrame}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      SnapsToDevicePixels="true"
+                                      Grid.Column="1">
+           <TextBlock Name="WindowTitle"
+                      Text="{TemplateBinding Title}"
+                      TextAlignment="Center"
+                      Foreground="{StaticResource ThemeActiveTextBrush}" />
+          </theme:MotifBorderDecorator>
+
+          <StackPanel Orientation="Horizontal"
+                      Grid.Column="2">
+           <Button Name="PART_MinimizeWindowButton"
+                   Command="{x:Static SystemCommands.MinimizeWindowCommand}"
+                   Background="{Binding Background, ElementName=WindowFrame}"
+                   Style="{StaticResource SystemButtonStyle}">
+            <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                        Background="{Binding Background, ElementName=WindowFrame}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        SnapsToDevicePixels="true"
+                                        Width="4"
+                                        Height="4" />
+           </Button>
+           <Button Name="PART_MaximizeWindowButton"
+                   Command="{x:Static SystemCommands.MaximizeWindowCommand}"
+                   Background="{Binding Background, ElementName=WindowFrame}"
+                   Style="{StaticResource SystemButtonStyle}">
+            <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                        Background="{Binding Background, ElementName=WindowFrame}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        SnapsToDevicePixels="true"
+                                        Width="11"
+                                        Height="11" />
+           </Button>
+           <Button Name="PART_RestoreWindowButton"
+                   Command="{x:Static SystemCommands.RestoreWindowCommand}"
+                   Background="{Binding Background, ElementName=WindowFrame}"
+                   Style="{StaticResource SystemButtonStyle}"
+                   Visibility="Collapsed">
+            <theme:MotifBorderDecorator BorderStyle="ThinPressed"
+                                        Background="{Binding Background, ElementName=WindowFrame}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        SnapsToDevicePixels="true"
+                                        Width="11"
+                                        Height="11" />
+           </Button>
+           <!--<Button Command="{x:Static SystemCommands.CloseWindowCommand}"
+                  Background="{Binding Background, ElementName=WindowFrame}"
+                  Style="{StaticResource SystemButtonStyle}">
+           <theme:MotifBorderDecorator BorderStyle="ThinRaised"
+                                         Background="{Binding Background, ElementName=WindowFrame}"
+                                         BorderThickness="{TemplateBinding BorderThickness}"
+                                         BorderBrush="{TemplateBinding BorderBrush}"
+                                         SnapsToDevicePixels="true"
+                                         Width="11"
+                                         Height="4" />
+          </Button>-->
+          </StackPanel>
+         </Grid>
+
+         <AdornerDecorator Name="PART_ClientAreaBorder"
+                           Grid.Row="1">
+          <ContentPresenter />
+         </AdornerDecorator>
+        </Grid>
+
+        <ResizeGrip Name="WindowResizeGrip"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Visibility="Collapsed"
+                    IsTabStop="false" />
+       </Grid>
+      </theme:MotifBorderDecorator>
+     </Border>
+     <ControlTemplate.Triggers>
+      <Trigger Property="IsActive"
+               Value="False">
+       <Setter Property="Foreground"
+               Value="{StaticResource ThemeControlTextBrush}"
+               TargetName="WindowTitle" />
+       <Setter Property="Background"
+               Value="{StaticResource ThemeControlBrush}"
+               TargetName="WindowFrame" />
+      </Trigger>
+      <Trigger Property="WindowState"
+               Value="Maximized">
+       <Setter TargetName="PART_MaximizeWindowButton"
+               Property="Visibility"
+               Value="Collapsed" />
+       <Setter TargetName="PART_RestoreWindowButton"
+               Property="Visibility"
+               Value="Visible" />
+       <Setter Property="Margin"
+               Value="{Binding Source={x:Static windows:SystemParameters.WindowResizeBorderThickness}}"
+               TargetName="WindowFrame" />
+      </Trigger>
+      <!--<Trigger Value="{x:Null}"
+               Property="Icon">
+       <Setter TargetName="PART_Icon"
+               Property="Source"
+               Value="/Motif;component/Resources/application.png" />
+      </Trigger>-->
+      <MultiTrigger>
+       <MultiTrigger.Conditions>
+        <Condition Property="ResizeMode"
+                   Value="CanResizeWithGrip" />
+        <Condition Property="WindowState"
+                   Value="Normal" />
+       </MultiTrigger.Conditions>
+       <Setter TargetName="WindowResizeGrip"
+               Property="Visibility"
+               Value="Visible" />
+      </MultiTrigger>
+      <Trigger Property="ResizeMode"
+               Value="NoResize">
+       <Setter TargetName="PART_MinimizeWindowButton"
+               Property="Visibility"
+               Value="Collapsed" />
+       <Setter TargetName="PART_MaximizeWindowButton"
+               Property="Visibility"
+               Value="Collapsed" />
+      </Trigger>
+     </ControlTemplate.Triggers>
+    </ControlTemplate>
+   </Setter.Value>
+  </Setter>
+ </Style>
+</ResourceDictionary>
