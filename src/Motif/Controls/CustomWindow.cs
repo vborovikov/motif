@@ -6,74 +6,74 @@
     using System.Windows.Input;
 
     [TemplatePart(Name = TemplateParts.Icon, Type = typeof(Image))]
-	[TemplatePart(Name = TemplateParts.ClientAreaBorder, Type = typeof(FrameworkElement))]
-	public abstract class CustomWindow : Window
-	{
-		private static class TemplateParts
-		{
-			internal const string Icon = "PART_Icon";
-			internal const string ClientAreaBorder = "PART_ClientAreaBorder";
-		}
+    [TemplatePart(Name = TemplateParts.ClientAreaBorder, Type = typeof(FrameworkElement))]
+    public abstract class CustomWindow : Window
+    {
+        private static class TemplateParts
+        {
+            internal const string Icon = "PART_Icon";
+            internal const string ClientAreaBorder = "PART_ClientAreaBorder";
+        }
 
-		private FrameworkElement clientAreaBorder;
-		private Image icon;
+        private FrameworkElement clientAreaBorder;
+        private Image icon;
 
-		protected static void RegisterSystemCommands(Type forType)
-		{
-			CommandManager.RegisterClassCommandBinding(forType,
-				new CommandBinding(SystemCommands.MinimizeWindowCommand, MinimizeWindowExecuted, MinimizeWindowCanExecute));
-			CommandManager.RegisterClassCommandBinding(forType,
-				new CommandBinding(SystemCommands.MaximizeWindowCommand, MaximizeWindowExecuted, MaximizeWindowCanExecute));
-			CommandManager.RegisterClassCommandBinding(forType,
-				new CommandBinding(SystemCommands.RestoreWindowCommand, RestoreWindowExecuted, RestoreWindowCanExecute));
-			CommandManager.RegisterClassCommandBinding(forType,
-				new CommandBinding(SystemCommands.CloseWindowCommand, CloseWindowExecuted, CloseWindowCanExecute));
-			CommandManager.RegisterClassCommandBinding(forType,
-				new CommandBinding(SystemCommands.ShowSystemMenuCommand, SystemMenuExecuted, SystemMenuCanExecute));
-		}
+        protected static void RegisterSystemCommands(Type forType)
+        {
+            CommandManager.RegisterClassCommandBinding(forType,
+                new CommandBinding(SystemCommands.MinimizeWindowCommand, MinimizeWindowExecuted, MinimizeWindowCanExecute));
+            CommandManager.RegisterClassCommandBinding(forType,
+                new CommandBinding(SystemCommands.MaximizeWindowCommand, MaximizeWindowExecuted, MaximizeWindowCanExecute));
+            CommandManager.RegisterClassCommandBinding(forType,
+                new CommandBinding(SystemCommands.RestoreWindowCommand, RestoreWindowExecuted, RestoreWindowCanExecute));
+            CommandManager.RegisterClassCommandBinding(forType,
+                new CommandBinding(SystemCommands.CloseWindowCommand, CloseWindowExecuted, CloseWindowCanExecute));
+            CommandManager.RegisterClassCommandBinding(forType,
+                new CommandBinding(SystemCommands.ShowSystemMenuCommand, SystemMenuExecuted, SystemMenuCanExecute));
+        }
 
-		public override void OnApplyTemplate()
-		{
-			base.OnApplyTemplate();
-			this.icon = base.GetTemplateChild(TemplateParts.Icon) as Image;
-			if (this.icon != null)
-			{
-				this.icon.MouseLeftButtonDown += new MouseButtonEventHandler(this.IconMouseLeftButtonDown);
-				this.icon.MouseRightButtonDown += new MouseButtonEventHandler(this.IconMouseRightButtonDown);
-			}
-			this.clientAreaBorder = base.GetTemplateChild(TemplateParts.ClientAreaBorder) as FrameworkElement;
-		}
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            this.icon = base.GetTemplateChild(TemplateParts.Icon) as Image;
+            if (this.icon != null)
+            {
+                this.icon.MouseLeftButtonDown += new MouseButtonEventHandler(this.IconMouseLeftButtonDown);
+                this.icon.MouseRightButtonDown += new MouseButtonEventHandler(this.IconMouseRightButtonDown);
+            }
+            this.clientAreaBorder = base.GetTemplateChild(TemplateParts.ClientAreaBorder) as FrameworkElement;
+        }
 
-		private void IconMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ClickCount == 1)
-			{
-				if (SystemCommands.ShowSystemMenuCommand.CanExecute(null, this))
-				{
-					SystemCommands.ShowSystemMenuCommand.Execute(null, this);
-				}
-			}
-			else if ((e.ClickCount == 2) && SystemCommands.CloseWindowCommand.CanExecute(null, this))
-			{
-				SystemCommands.CloseWindowCommand.Execute(null, this);
-			}
-		}
+        private void IconMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                if (SystemCommands.ShowSystemMenuCommand.CanExecute(null, this))
+                {
+                    SystemCommands.ShowSystemMenuCommand.Execute(null, this);
+                }
+            }
+            else if ((e.ClickCount == 2) && SystemCommands.CloseWindowCommand.CanExecute(null, this))
+            {
+                SystemCommands.CloseWindowCommand.Execute(null, this);
+            }
+        }
 
-		private void IconMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-		{
-			if (SystemCommands.ShowSystemMenuCommand.CanExecute(e, this))
-			{
-				SystemCommands.ShowSystemMenuCommand.Execute(e, this);
-			}
-		}
+        private void IconMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (SystemCommands.ShowSystemMenuCommand.CanExecute(e, this))
+            {
+                SystemCommands.ShowSystemMenuCommand.Execute(e, this);
+            }
+        }
 
-		private static void CloseWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
-		{
-			args.CanExecute = true;
-		}
+        private static void CloseWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = true;
+        }
 
-		private static void CloseWindowExecuted(object sender, ExecutedRoutedEventArgs args)
-		{
+        private static void CloseWindowExecuted(object sender, ExecutedRoutedEventArgs args)
+        {
             if (sender is CustomWindow window)
             {
                 SystemCommands.CloseWindow(window);
@@ -81,8 +81,8 @@
             }
         }
 
-		private static void MaximizeWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
-		{
+        private static void MaximizeWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
+        {
             if (sender is CustomWindow window &&
                 window.WindowState != WindowState.Maximized &&
                 window.ResizeMode != ResizeMode.NoResize &&
@@ -92,8 +92,8 @@
             }
         }
 
-		private static void MaximizeWindowExecuted(object sender, ExecutedRoutedEventArgs args)
-		{
+        private static void MaximizeWindowExecuted(object sender, ExecutedRoutedEventArgs args)
+        {
             if (sender is CustomWindow window)
             {
                 SystemCommands.MaximizeWindow(window);
@@ -101,8 +101,8 @@
             }
         }
 
-		private static void MinimizeWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
-		{
+        private static void MinimizeWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
+        {
             if (sender is CustomWindow window &&
                 window.WindowState != WindowState.Minimized &&
                 window.ResizeMode != ResizeMode.NoResize)
@@ -111,8 +111,8 @@
             }
         }
 
-		private static void MinimizeWindowExecuted(object sender, ExecutedRoutedEventArgs args)
-		{
+        private static void MinimizeWindowExecuted(object sender, ExecutedRoutedEventArgs args)
+        {
             if (sender is CustomWindow window)
             {
                 SystemCommands.MinimizeWindow(window);
@@ -120,16 +120,16 @@
             }
         }
 
-		private static void RestoreWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
-		{
+        private static void RestoreWindowCanExecute(object sender, CanExecuteRoutedEventArgs args)
+        {
             if ((sender is CustomWindow window) && (window.WindowState != WindowState.Normal))
             {
                 args.CanExecute = true;
             }
         }
 
-		private static void RestoreWindowExecuted(object sender, ExecutedRoutedEventArgs args)
-		{
+        private static void RestoreWindowExecuted(object sender, ExecutedRoutedEventArgs args)
+        {
             if (sender is CustomWindow window)
             {
                 SystemCommands.RestoreWindow(window);
@@ -137,13 +137,13 @@
             }
         }
 
-		private static void SystemMenuCanExecute(object sender, CanExecuteRoutedEventArgs args)
-		{
-			args.CanExecute = true;
-		}
+        private static void SystemMenuCanExecute(object sender, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = true;
+        }
 
-		private static void SystemMenuExecuted(object sender, ExecutedRoutedEventArgs args)
-		{
+        private static void SystemMenuExecuted(object sender, ExecutedRoutedEventArgs args)
+        {
             if (sender is CustomWindow relativeTo)
             {
                 Point point;
@@ -164,5 +164,5 @@
                 args.Handled = true;
             }
         }
-	}
+    }
 }
