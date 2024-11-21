@@ -80,7 +80,7 @@
            <Trigger Property="IsPressed"
                     Value="true">
             <Setter Property="BorderStyle"
-                    Value="ThinPressed"
+                    Value="AltPressed"
                     TargetName="ContentContainer" />
            </Trigger>
            <Trigger Property="IsEnabled"
@@ -326,7 +326,7 @@
                                         Width="11"
                                         Height="11" />
            </Button>
-           <!--<Button Command="{x:Static SystemCommands.CloseWindowCommand}"
+           <Button Command="{x:Static SystemCommands.CloseWindowCommand}"
                   Background="{Binding Background, ElementName=WindowFrame}"
                   Style="{StaticResource SystemButtonStyle}">
            <theme:MotifBorderDecorator BorderStyle="ThinRaised"
@@ -334,9 +334,9 @@
                                          BorderThickness="{TemplateBinding BorderThickness}"
                                          BorderBrush="{TemplateBinding BorderBrush}"
                                          SnapsToDevicePixels="true"
-                                         Width="11"
-                                         Height="4" />
-          </Button>-->
+                                         Width="4"
+                                         Height="11" />
+          </Button>
           </StackPanel>
          </Grid>
 
