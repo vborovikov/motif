@@ -15,8 +15,8 @@
             internal const string ClientAreaBorder = "PART_ClientAreaBorder";
         }
 
-        private FrameworkElement clientAreaBorder;
-        private Image icon;
+        private FrameworkElement? clientAreaBorder;
+        private Image? icon;
 
         protected static void RegisterSystemCommands(Type forType)
         {
